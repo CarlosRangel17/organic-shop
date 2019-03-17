@@ -16,14 +16,14 @@ export class AuthService {
 
   constructor(
     private userService: UserService,
-    private afAuth: AngularFireAuth, 
-    private route: ActivatedRoute) { 
+    private afAuth: AngularFireAuth,
+    private route: ActivatedRoute) {
     this.user$ = afAuth.authState;
   }
 
   login () {
-    // Before sending user to Google, you want to send the returnUrl in local storage 
-    let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
+    // Before sending user to Google, you want to send the returnUrl in local storage
+    const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
     localStorage.setItem('returnUrl', returnUrl);
 
     this.afAuth.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
@@ -33,12 +33,12 @@ export class AuthService {
     this.afAuth.auth.signOut();
   }
 
-  get appUser$() : Observable<AppUser> {
+  get appUser$(): Observable<AppUser> {
     return this.user$
     .switchMap(user => {
-      if (user) return this.userService.get(user.uid);
+      if (user) { return this.userService.get(user.uid); }
 
       return Observable.of(null);
-    })
+    });
   }
 }
