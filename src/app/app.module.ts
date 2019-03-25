@@ -5,6 +5,8 @@ import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/fi
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
+import { CustomFormsModule } from 'ng2-validation';
 
 import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
@@ -24,6 +26,7 @@ import { UserService } from './user.service';
 import { AdminAuthGuard as AdminAuthGuard } from './admin-auth-guard.service';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { CategoryService } from './category.service';
+import { ProductService } from './product.service';
 
 @NgModule({
   declarations: [
@@ -38,14 +41,16 @@ import { CategoryService } from './category.service';
     AdminProductsComponent,
     AdminOrdersComponent,
     LoginComponent,
-    ProductFormComponent
+    ProductFormComponent,
   ],
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
+    CustomFormsModule,
     NgbModule.forRoot(),
+    FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
       { path: 'products', component: ProductsComponent },
@@ -57,15 +62,21 @@ import { CategoryService } from './category.service';
       { path: 'my/orders', component: MyOrdersComponent, canActivate: [AuthGuard] },
 
       {
-        path: 'admin/products',
-        component:
-        AdminProductsComponent,
-        canActivate: [AuthGuard, AdminAuthGuard]
-      },
-      {
         path: 'admin/products/new',
         component:
         ProductFormComponent,
+        canActivate: [AuthGuard, AdminAuthGuard]
+      },
+      {
+        path: 'admin/products/:id',
+        component:
+        ProductFormComponent,
+        canActivate: [AuthGuard, AdminAuthGuard]
+      },
+      {
+        path: 'admin/products',
+        component:
+        AdminProductsComponent,
         canActivate: [AuthGuard, AdminAuthGuard]
       },
       {
@@ -81,6 +92,7 @@ import { CategoryService } from './category.service';
     AuthGuard,
     AdminAuthGuard,
     CategoryService,
+    ProductService,
     UserService,
     { provide: FirestoreSettingsToken, useValue: {}}
   ],
