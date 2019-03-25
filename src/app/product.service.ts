@@ -28,4 +28,8 @@ export class ProductService {
   update(productId: string, product: AppProduct) {
     return this.db.collection('products').doc(productId).update(product);
   }
+
+  delete(productId: string) {
+    return this.db.collection('products').doc(productId).delete();
+  }
 }

@@ -1,4 +1,6 @@
 export interface AppProduct {
     title: string;
-    price: string;
+    price: number;
+    category: string;
+    imageUrl: string;
 }
