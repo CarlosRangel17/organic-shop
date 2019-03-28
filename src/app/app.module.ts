@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
+import { DataTableModule } from 'angular-6-datatable';
 
 import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
@@ -27,6 +28,9 @@ import { AdminAuthGuard as AdminAuthGuard } from './admin-auth-guard.service';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { CategoryService } from './category.service';
 import { ProductService } from './product.service';
+import { ProductFilterComponent } from './products/product-filter/product-filter.component';
+import { ProductCardComponent } from './product-card/product-card.component';
+import { ShoppingCartService } from './shopping-cart.service';
 
 @NgModule({
   declarations: [
@@ -42,6 +46,8 @@ import { ProductService } from './product.service';
     AdminOrdersComponent,
     LoginComponent,
     ProductFormComponent,
+    ProductFilterComponent,
+    ProductCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,10 +55,11 @@ import { ProductService } from './product.service';
     AngularFirestoreModule,
     AngularFireAuthModule,
     CustomFormsModule,
+    DataTableModule,
     NgbModule.forRoot(),
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent },
+      { path: '', component: ProductsComponent },
       { path: 'products', component: ProductsComponent },
       { path: 'shopping-cart', component: ShoppingCartComponent },
       { path: 'login', component: LoginComponent },
@@ -94,6 +101,7 @@ import { ProductService } from './product.service';
     CategoryService,
     ProductService,
     UserService,
+    ShoppingCartService,
     { provide: FirestoreSettingsToken, useValue: {}}
   ],
   bootstrap: [AppComponent]

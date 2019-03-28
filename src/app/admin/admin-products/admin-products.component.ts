@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProductService } from 'src/app/product.service';
-import { Subscription } from 'rxjs';
+import { Subscription, from } from 'rxjs';
 import { AppProduct } from 'src/app/models/app-product';
 
 @Component({
@@ -15,7 +15,7 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
 
   constructor(private productService: ProductService) {
     this.subscription = this.productService.getAll()
-      .subscribe(products => this.filteredProducts = this.products = products);
+      .subscribe(products => this.filteredProducts = this.products = <AppProduct[]><unknown>products);
   }
 
   filter(query: string){

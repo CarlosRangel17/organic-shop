@@ -23,7 +23,7 @@ export class ProductFormComponent {
     private categoryService: CategoryService,
     private productService: ProductService) {
       // Initialize variables
-      this.categories$ = this.categoryService.getCategories();
+      this.categories$ = this.categoryService.getAll();
       this.id = this.route.snapshot.paramMap.get('id');
       if (this.id) {
         this.productService.get(this.id)
@@ -31,8 +31,11 @@ export class ProductFormComponent {
           .subscribe(p => this.product = p);
       } else {
         this.product = {
+          key: '',
           title: '',
-          price: 0
+          price: 0,
+          category: '',
+          imageUrl: ''
         };
       }
   }

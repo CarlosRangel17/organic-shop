@@ -7,7 +7,32 @@
         (keyup)="filter(query.value)"
         type="text" class="form-control" placeholder="Search...">
 </p>
-<table class="table">
+
+<table class="table table-striped" [mfData]="filteredProducts" #mf="mfDataTable" [mfRowsOnPage]="5">
+    <thead>
+        <tr>
+            <th style="width:40%">Title</th>
+            <th style="width:50%">Price</th>
+            <th style="width:10%"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let p of mf.data">
+            <td>{{ p.title }}</td>
+            <td>{{ p.price | currency:'USD':true }}</td>
+            <td>
+                <a [routerLink]="['/admin/products/', p.key]">Edit</a>
+            </td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <td colspan="4">
+            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+        </td>
+    </tfoot>
+</table>
+
+<!-- <table class="table">
     <thead>
         <tr>
             <th>Title</th>
@@ -17,7 +42,7 @@
     </thead>
     <tbody>
         <tr *ngFor="let p of filteredProducts">
-        <!-- <tr *ngFor="let p of products$ | async"> -->
+        <tr *ngFor="let p of products$ | async">
             <td>{{ p.title }}</td>
             <td>{{ p.price }}</td>
             <td>
@@ -25,4 +50,4 @@
             </td>
         </tr>
     </tbody>
-</table>
+</table> -->

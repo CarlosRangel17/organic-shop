@@ -12,7 +12,7 @@ export class CategoryService {
 
   constructor(private db: AngularFirestore) { }
 
-  getCategories(): Observable<AppCategory[]> {
+  getAll(): Observable<AppCategory[]> {
     // Approach #1 - Working
     return this.db.collection('categories', ref => ref.orderBy('description')).valueChanges() as Observable<AppCategory[]>;
     // Approach #2 - Working
