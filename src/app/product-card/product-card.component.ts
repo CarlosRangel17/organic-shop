@@ -19,13 +19,13 @@ export class ProductCardComponent {
     this.cartService.addToCart(this.product);
   }
 
-  removeFromCart(){
+  removeFromCart() {
     this.cartService.removeFromCart(this.product);
   }
   getQuantity() {
-    if (!this.shoppingCart || !this.shoppingCart.items) return 0;
+    if (!this.shoppingCart || !this.shoppingCart.items) { return 0; }
 
-    let item = this.shoppingCart.items.find(x => x.key === this.product.key);
+    const item = this.shoppingCart.items.find(x => x.key === this.product.key);
     return item ? item.quantity : 0;
   }
 }

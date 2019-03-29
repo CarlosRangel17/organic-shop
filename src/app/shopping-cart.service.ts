@@ -20,14 +20,21 @@ export class ShoppingCartService {
     });
   }
 
+  // async getCartItems() {
+  //   const cartId = await this.getOrCreateCartId();
+  //   return this.db.collection('shopping-carts').doc(cartId).collection('items').snapshotChanges().pipe(
+  //       map(actions => actions.map(a => ({ key: a.payload.doc.id, ...a.payload.doc.data() }))
+  //     ));
+  // }
+
   async getCart() {
-    let cartId = await this.getOrCreateCartId();
+    const cartId = await this.getOrCreateCartId();
     return this.db.collection('shopping-carts').doc(cartId)
       .valueChanges()
       .pipe(
         map((cart: AppShoppingCart) => {
           this.getCartItems(cartId).subscribe(items => {
-            cart.items = items;
+            cart.items = items; // {...items}
           });
           return cart;
         })
@@ -35,22 +42,23 @@ export class ShoppingCartService {
   }
 
   private getCartItems(cartId: string) {
-    return this.db.collection('shopping-carts').doc(cartId).collection('items')
-      .snapshotChanges()
-      .pipe(
-        map(actions => actions.map(a => ({ key: a.payload.doc.id, ...a.payload.doc.data() }))
-        )) as Observable<AppShoppingCartItem[]>;
+    return this.db.collection('shopping-carts').ref.doc(cartId).collection('items').doc;
+      // .snapshotChanges()
+      // .pipe(
+      //   map(actions => actions.map(a => ({ key: a.payload.doc.id, ...a.payload.doc.data() }))
+      //   )) as Observable<AppShoppingCartItem[]>;
   }
 
   private getItem(cartId: string, productId: string) {
-    return this.db.collection('shopping-carts').doc(cartId).collection('items').doc(productId).valueChanges() as Observable<AppShoppingCartItem>;
+    return this.db.collection('shopping-carts').doc(cartId).collection('items').doc(productId)
+      .valueChanges() as Observable<AppShoppingCartItem>;
   }
 
   private async getOrCreateCartId(): Promise<string> {
-    let cartId = localStorage.getItem('cartId');
-    if (cartId) return cartId;
+    const cartId = localStorage.getItem('cartId');
+    if (cartId) { return cartId; }
 
-    let result = await this.create(); // this.create().then(result => {});
+    const result = await this.create(); // this.create().then(result => {});
     localStorage.setItem('cartId', result.id);
     return result.id;
   }
@@ -64,8 +72,8 @@ export class ShoppingCartService {
   }
 
   private async updateItemQuantity(product: AppProduct, change: number) {
-    let cartId = await this.getOrCreateCartId();
-    let item$ = this.getItem(cartId, product.key);
+    const cartId = await this.getOrCreateCartId();
+    const item$ = this.getItem(cartId, product.key);
     item$.take(1).subscribe(item => {
       this.db.collection('shopping-carts').doc(cartId).collection('items').doc(product.key)
         .set({

@@ -6,6 +6,7 @@ import { ShoppingCartService } from '../shopping-cart.service';
 import { AppShoppingCart } from '../models/app-shopping-cart';
 
 @Component({
+  // tslint:disable-next-line:component-selector
   selector: 'bs-navbar',
   templateUrl: './bs-navbar.component.html',
   styleUrls: ['./bs-navbar.component.sass']
@@ -19,16 +20,17 @@ export class BsNavbarComponent implements OnInit {
 
   async ngOnInit() {
     this.auth.appUser$.subscribe(appUser => this.appUser = appUser);
-    let cart$ = await this.shoppingCartService.getCart();
+    const cart$ = await this.shoppingCartService.getCart();
     cart$.subscribe(cart => {
       this.shoppingCartItemCount = 0;
-      for (let productId in cart.items)
-      {
+      console.log(cart);
+      console.log(cart.items);
+      // tslint:disable-next-line:forin
+      for (const productId in cart.items) {
         console.log(productId);
         this.shoppingCartItemCount += cart.items[productId].quantity;
       }
     });
-
     // cart$.switchMap(cart => {
     //   console.log(cart);
     //   this.shoppingCartItemCount = 0;

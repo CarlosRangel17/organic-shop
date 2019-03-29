@@ -5,6 +5,7 @@ import { AppProduct } from '../models/app-product';
 import 'rxjs/add/operator/switchMap';
 import { ShoppingCartService } from '../shopping-cart.service';
 import { Subscription } from 'rxjs';
+import { AppShoppingCart } from '../models/app-shopping-cart';
 
 @Component({
   selector: 'app-products',
@@ -39,7 +40,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   async ngOnInit() {
     this.subscription = (await this.shoppingCartService.getCart())
-      .subscribe(cart => {
+      .subscribe((cart: AppShoppingCart) => {
         this.cart = cart;
       });
   }
