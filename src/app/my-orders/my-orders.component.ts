@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth.service';
-import { OrderService } from '../order.service';
+import { AuthService } from '../shared/services/auth.service';
+import { OrderService } from '../shared/services/order.service';
 
 @Component({
   selector: 'app-my-orders',
@@ -12,6 +12,6 @@ export class MyOrdersComponent {
   constructor(
     private authService: AuthService,
     private orderService: OrderService) { 
-      this.orders$ = authService.user$.switchMap(u => orderService.getOrdersByUser(u.uid));
+      this.orders$ = this.authService.user$.switchMap(u => this.orderService.getOrdersByUser(u.uid));
   }
 }

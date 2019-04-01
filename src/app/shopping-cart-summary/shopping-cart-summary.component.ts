@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { AppShoppingCart } from '../models/app-shopping-cart';
+import { AppShoppingCart } from '../shared/models/app-shopping-cart';
 
 @Component({
   selector: 'app-shopping-cart-summary',

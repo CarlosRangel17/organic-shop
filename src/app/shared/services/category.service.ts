@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { AppCategory } from './models/app-category';
+import { AppCategory } from '../models/app-category';
 // import { map } from 'rxjs/operators';
 // import { defineBase } from '@angular/core/src/render3';
 

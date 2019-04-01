@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { CategoryService } from 'src/app/category.service';
+import { CategoryService } from '../../shared/services/category.service';
 import { Observable } from 'rxjs';
-import { AppCategory } from 'src/app/models/app-category';
-import { ProductService } from 'src/app/product.service';
+import { AppCategory } from '../../shared/models/app-category';
+import { ProductService } from '../../shared/services/product.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { take, map } from 'rxjs/operators';
-import { AppProduct } from 'src/app/models/app-product';
+import { AppProduct } from '../../shared/models/app-product';
 
 @Component({
   selector: 'app-product-form',

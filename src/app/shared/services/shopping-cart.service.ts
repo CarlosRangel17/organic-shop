@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { AppProduct } from './models/app-product';
+import { AppProduct } from '../models/app-product';
 import { Observable } from 'rxjs';
-import { AppShoppingCartItem } from './models/app-shopping-cart-item';
-import { AppShoppingCart } from './models/app-shopping-cart';
+import { AppShoppingCartItem } from '../models/app-shopping-cart-item';
+import { AppShoppingCart } from '../models/app-shopping-cart';
 import 'rxjs/add/operator/take';
 import { map } from 'rxjs/operators';
 

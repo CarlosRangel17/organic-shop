@@ -5,7 +5,7 @@ import { Router, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/ro
 import { map, switchMap } from 'rxjs/operators';
 import { UserService } from './user.service';
 import { Observable } from 'rxjs';
-import { AppUser } from './models/app-user';
+import { AppUser } from '../models/app-user';
 @Injectable({
   providedIn: 'root'
 })
