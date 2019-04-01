@@ -32,6 +32,9 @@ import { ProductFilterComponent } from './products/product-filter/product-filter
 import { ProductCardComponent } from './product-card/product-card.component';
 import { ShoppingCartService } from './shopping-cart.service';
 import { ProductQuantityComponent } from './product-quantity/product-quantity.component';
+import { OrderService } from './order.service';
+import { ShoppingCartSummaryComponent } from './shopping-cart-summary/shopping-cart-summary.component';
+import { ShippingFormComponent } from './shipping-form/shipping-form.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +53,8 @@ import { ProductQuantityComponent } from './product-quantity/product-quantity.co
     ProductFilterComponent,
     ProductCardComponent,
     ProductQuantityComponent,
+    ShoppingCartSummaryComponent,
+    ShippingFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,7 +72,7 @@ import { ProductQuantityComponent } from './product-quantity/product-quantity.co
       { path: 'login', component: LoginComponent },
 
       { path: 'check-out', component: CheckOutComponent, canActivate: [AuthGuard] },
-      { path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuard] },
+      { path: 'order-success/:id', component: OrderSuccessComponent, canActivate: [AuthGuard] },
       { path: 'my/orders', component: MyOrdersComponent, canActivate: [AuthGuard] },
 
       {
@@ -104,6 +109,7 @@ import { ProductQuantityComponent } from './product-quantity/product-quantity.co
     ProductService,
     UserService,
     ShoppingCartService,
+    OrderService,
     { provide: FirestoreSettingsToken, useValue: {}}
   ],
   bootstrap: [AppComponent]

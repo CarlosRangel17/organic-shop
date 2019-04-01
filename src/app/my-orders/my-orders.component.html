@@ -1,3 +1,25 @@
-<p>
-  my-orders works!
-</p>
+<h1>Orders</h1>
+
+<table *ngIf="orders$ | async as orders" class="table" [mfData]="orders" #mf="mfDataTable" [mfRowsOnPage]="5">
+    <thead>
+        <tr>
+            <th style="width:40%">Customer</th>
+            <th style="width:50%">Date</th>
+            <th style="width:10%"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let o of mf.data">
+            <td>{{ o.shipping.name }}</td>
+            <td>{{ o.datePlaced | date }}</td>
+            <td>
+              <a [routerLink]="['/admin/orders/', o.key]">View</a>
+            </td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <td colspan="4">
+            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+        </td>
+    </tfoot>
+</table>

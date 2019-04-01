@@ -15,8 +15,7 @@ export class ShoppingCartComponent implements OnInit {
   async ngOnInit() {
     const items$ = await this.shoppingCartService.getItems();
     items$.subscribe((items: any) => {
-      const filteredItems = items.filter(item => item.quantity > 0);
-      this.cart = new AppShoppingCart(filteredItems);
+      this.cart = new AppShoppingCart(items);
     });
    }
 

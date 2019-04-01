@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ShoppingCartService } from '../shopping-cart.service';
 import { AppShoppingCart } from '../models/app-shopping-cart';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-check-out',
@@ -8,21 +9,18 @@ import { AppShoppingCart } from '../models/app-shopping-cart';
   styleUrls: ['./check-out.component.css']
 })
 export class CheckOutComponent implements OnInit {
-  shipping = {};
   cart: AppShoppingCart;
-
+  subscription: Subscription;
   constructor(private shoppingCartService: ShoppingCartService) { }
 
-  placeOrder() {
-    const order = {
-      datePlaced: new Date().getTime(),
-      shipping: this.shipping
-    };
-    console.log(this.shipping);
+  async ngOnInit() {
+    const items$ = await this.shoppingCartService.getItems();
+    this.subscription = items$.subscribe((items: any) => {
+      this.cart = new AppShoppingCart(items);
+    });
   }
 
-  async ngOnInit() { 
-    const cart$ = await this.shoppingCartService.getCart();
-    cart$.subscribe(cart => this.cart = cart);
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }
