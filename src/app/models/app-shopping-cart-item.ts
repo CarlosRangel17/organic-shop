@@ -1,7 +1,18 @@
 import { AppProduct } from './app-product';
 
-export interface AppShoppingCartItem {
+export class AppShoppingCartItem {
     key: string;
-    product: AppProduct;
+    title: string;
+    imageUrl: string;
+    price: number;
     quantity: number;
+
+    // init is meant as a basic variable & captures partial properties
+    constructor(init?: Partial<AppShoppingCartItem>) {
+        Object.assign(this, init);
+    }
+
+    get totalPrice() {
+        return this.price * this.quantity;
+    }
 }

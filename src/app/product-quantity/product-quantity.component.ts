@@ -1,14 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AppProduct } from '../models/app-product';
-import { ShoppingCartService } from '../shopping-cart.service';
 import { AppShoppingCart } from '../models/app-shopping-cart';
+import { ShoppingCartService } from '../shopping-cart.service';
 
 @Component({
-  selector: 'product-card',
-  templateUrl: './product-card.component.html',
-  styleUrls: ['./product-card.component.sass']
+  selector: 'app-product-quantity',
+  templateUrl: './product-quantity.component.html',
+  styleUrls: ['./product-quantity.component.sass']
 })
-export class ProductCardComponent {
+export class ProductQuantityComponent {
   @Input('product') product: AppProduct;
   @Input('show-actions') showActions = true;
   @Input('shopping-cart') shoppingCart: AppShoppingCart;
@@ -24,5 +24,9 @@ export class ProductCardComponent {
 
     const item = this.shoppingCart.items.find(x => x.key === this.product.key);
     return item ? item.quantity : 0;
+  }
+
+  removeFromCart() {
+    this.cartService.removeFromCart(this.product);
   }
 }
