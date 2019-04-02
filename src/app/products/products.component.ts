@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AppProduct } from '../shared/models/app-product';
 import 'rxjs/add/operator/switchMap';
 import { ShoppingCartService } from '../shared/services/shopping-cart.service';
-import { Subscription, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { AppShoppingCart } from '../shared/models/app-shopping-cart';
 
 @Component({

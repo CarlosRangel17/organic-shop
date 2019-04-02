@@ -19,8 +19,4 @@ export class CheckOutComponent implements OnInit {
       this.cart = new AppShoppingCart(items);
     });
   }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
 }

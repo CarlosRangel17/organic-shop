@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { CategoryService } from '../../shared/services/category.service';
+import { CategoryService } from '../../../shared/services/category.service';
 import { Observable } from 'rxjs';
-import { AppCategory } from '../../shared/models/app-category';
-import { ProductService } from '../../shared/services/product.service';
+import { AppCategory } from '../../../shared/models/app-category';
+import { ProductService } from '../../../shared/services/product.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { take, map } from 'rxjs/operators';
-import { AppProduct } from '../../shared/models/app-product';
+import { AppProduct } from '../../../shared/models/app-product';
 
 @Component({
   selector: 'app-product-form',
@@ -51,8 +51,8 @@ export class ProductFormComponent {
   }
 
   delete() {
-    if(!confirm('Are you sure you want to delete this product?')) return;
-    
+    if (!confirm('Are you sure you want to delete this product?')) { return; }
+
     this.productService.delete(this.id);
     this.router.navigate(['/admin/products']);
   }
